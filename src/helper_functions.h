@@ -58,6 +58,10 @@ inline double dist(double x1, double y1, double x2, double y2) {
   return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
+inline double gaussian_bivariate(double x, double y, double mu_x, double mu_y, double sig_x, double sig_y) {
+ return exp(-((x-mu_x)*(x-mu_x)/(2.0*sig_x*sig_x) + (y-mu_y)*(y-mu_y)/(2.0*sig_y*sig_y))) / (2.0*M_PI*sig_x*sig_y);
+}
+
 /**
  * Computes the error between ground truth and particle filter data.
  * @param (gt_x, gt_y, gt_theta) x, y and theta of ground truth

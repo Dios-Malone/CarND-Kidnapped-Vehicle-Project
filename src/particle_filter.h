@@ -57,15 +57,16 @@ class ParticleFilter {
   void prediction(double delta_t, double std_pos[], double velocity, 
                   double yaw_rate);
   
-  /**
-   * dataAssociation Finds which observations correspond to which landmarks 
-   *   (likely by using a nearest-neighbors data association).
-   * @param predicted Vector of predicted landmark observations
-   * @param observations Vector of landmark observations
-   */
-  void dataAssociation(std::vector<LandmarkObs> predicted, 
-                       std::vector<LandmarkObs>& observations);
-  
+	/**
+	 * dataAssociation Finds which observations correspond to which landmarks (using
+	 *   a nearest-neighbors data association).
+	 * @param trans_obser Vector of transformed observations
+	 * @param map_landmarks Vector of landmark observations
+	 */
+        void dataAssociation(std::vector<LandmarkObs>& trans_obser, const Map &map_landmarks);
+ 
+  double compute_probability(const std::vector<LandmarkObs>& trans_obser, const Map &map_landmarks, double std_landmark[]); 
+  void transform_observation(double x_particle, double y_particle, double theta_particle, double x_obs, double y_obs, double &x_map, double &y_map); 
   /**
    * updateWeights Updates the weights for each particle based on the likelihood
    *   of the observed measurements. 
